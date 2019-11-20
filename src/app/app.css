@@ -1,0 +1,305 @@
+@value unit, font, font-size from "@jetbrains/ring-ui/components/global/global.css";
+
+:global(.widget-body) {
+  margin: 0;
+  padding: calc(unit * 2);
+
+  background: #fff;
+
+  font-size: font-size;
+}
+
+.widget {
+  composes: font;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+}
+
+.commitIcon {
+  position: absolute;
+  left: -8px;
+
+  color: rgb(198, 203, 209);
+  fill: rgb(198, 203, 209);
+}
+
+.commitCell {
+  max-width: 300px;
+
+  text-overflow: ellipsis;
+}
+
+.commitTitle {
+  overflow: hidden;
+
+  padding-left: 10px;
+
+  text-overflow: ellipsis;
+
+  color: rgb(68, 77, 86);
+
+  font-weight: 600;
+}
+
+.commitHeader {
+  display: flex;
+  flex-direction: row;
+
+  color: rgb(88, 96, 105);
+}
+
+.commitsListing {
+  position: relative;
+
+  padding-left: 4px;
+}
+
+.commitsListing::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 14px;
+
+  display: block;
+
+  width: 2px;
+
+  margin-left: -16px;
+
+  content: "";
+
+  background-color: #eff1f3;
+}
+
+.commitPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  min-width: 460px;
+  height: 50px;
+  margin-left: 8px;
+
+  color: rgb(106, 115, 125);
+  border: 1px solid rgb(234, 236, 239);
+
+  font-size: 14px;
+}
+
+.commitBlock {
+  padding-bottom: 10px;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+
+  line-height: 12px;
+}
+
+.commitMeta {
+  display: flex;
+  flex-direction: row;
+
+  padding-left: 10px;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.commitLinksCell {
+  position: relative;
+
+  display: table-cell;
+  align-self: right;
+
+  max-width: 170px;
+  height: 62px;
+  padding: 8px 10px;
+
+  text-align: right;
+
+  color: rgb(106, 115, 125);
+
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.revisionLink {
+  position: relative;
+
+  display: block;
+  float: left;
+
+  box-sizing: border-box;
+  width: 50px;
+  height: 30px;
+
+  margin-top: 2px;
+
+  padding-top: 4px;
+
+  cursor: pointer;
+  text-align: center;
+
+  vertical-align: middle;
+  white-space: nowrap;
+
+  color: rgb(3, 102, 214);
+  border: 1px solid rgba(27, 31, 35, 0.2);
+
+  border-radius: 0 3px 3px 0;
+
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 20px;
+
+  text-decoration-line: none;
+}
+
+.copyToClipboardBtn {
+  position: relative;
+
+  display: block;
+  float: left;
+
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+
+  margin-top: 2px;
+  padding: 1px 12px 6px;
+
+  cursor: pointer;
+  text-align: right;
+
+  vertical-align: middle;
+  white-space: nowrap;
+
+  color: rgb(3, 102, 214) !important;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  border-right-width: 0;
+
+  border-radius: 3px 0 0 3px;
+  background-color: rgb(255, 255, 255);
+
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 20px;
+
+  fill: rgb(3, 102, 214);
+}
+
+.copyToClipboardBtn:hover {
+  color: #fff !important;
+  border-color: rgb(3, 102, 214);
+  background-color: rgb(3, 102, 214);
+  fill: #fff;
+}
+
+.copyToClipboardBtn:focus {
+  outline: none;
+}
+
+.revisionLink:hover {
+  color: #fff;
+  border-color: rgb(3, 102, 214);
+  background-color: rgb(3, 102, 214);
+}
+
+.viewCodeBtn:hover {
+  color: #fff;
+  border-color: rgb(3, 102, 214);
+  background-color: rgb(3, 102, 214);
+  fill: #fff;
+}
+
+.copyToClipboardIcon {
+  display: inline-block;
+  overflow-x: auto;
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  vertical-align: text-top;
+}
+
+.commitLinksGroup {
+  display: inline-block;
+
+  box-sizing: border-box;
+  width: 80px;
+  height: 34px;
+
+  margin-right: 5px;
+
+  text-align: right;
+  vertical-align: middle;
+
+  color: rgb(106, 115, 125);
+
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 12px;
+  line-height: 18px;
+  overflow-wrap: break-word;
+  text-size-adjust: 100%;
+}
+
+.viewCodeBtn {
+  position: relative;
+
+  display: inline-block;
+
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+
+  margin-top: 0;
+  padding-top: 6px;
+
+  padding-right: 7px;
+
+  cursor: pointer;
+
+  vertical-align: middle;
+
+  color: rgb(3, 102, 214);
+  border: 1px solid rgba(27, 31, 35, 0.2);
+
+  border-radius: 3px;
+  background: rgb(255, 255, 255) none;
+
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 10px;
+  font-weight: 400;
+
+  fill: rgb(3, 102, 214);
+  line-height: 15px;
+}
+
+.viewCodeIcon {
+  position: center;
+
+  vertical-align: text-top;
+}
+
+.loadMoreLink {
+  text-align: center;
+}
+
+.formFooter {
+  position: fixed;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

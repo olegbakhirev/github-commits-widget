@@ -1,0 +1,22 @@
+{
+  "key": "github-commits-widget",
+  "name": "GitHub Commits Widget",
+  "version": "1.0.0",
+  "description": "Widget for displaying commits for GitHub project",
+  "author": "Oleg Bakhirev <oleg.bakhirev@gmail.com>",
+  "iconUrl": "pict/github.png",
+  "capabilities": {
+    "topNavigation": true,
+    "popups": true
+  },
+  "dependencies": {
+    "Hub": ">=2017.4"
+  },
+  "products": {
+    "Hub": ">=2017.4"
+  },
+  "view": {
+    "defaultWidth": 3,
+    "defaultHeight": 2
+  }
+}
