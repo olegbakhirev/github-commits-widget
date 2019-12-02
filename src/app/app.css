@@ -29,7 +29,7 @@
 }
 
 .commitCell {
-  max-width: 300px;
+  max-width: 65%;
 
   text-overflow: ellipsis;
 }
@@ -96,7 +96,7 @@
 }
 
 .avatar {
-  width: 20px;
+  min-width: 20px;
   height: 20px;
   margin-right: 3px;
 
@@ -302,4 +302,10 @@
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.commitAuthor {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }

@@ -73,7 +73,6 @@ const webpackConfig = () => ({
         test: /\.js$/,
         include: [
           join(__dirname, 'node_modules/chai-as-promised'),
-          join(__dirname, 'node_modules', '@github', 'clipboard-copy-element'),
           componentsPath
         ],
         loader: 'babel-loader?cacheDirectory'

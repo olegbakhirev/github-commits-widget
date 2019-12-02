@@ -10,6 +10,11 @@
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+  },
+  "rules": {
+    "import/no-commonjs": "off",
+    "no-magic-numbers" : "off",
+    "react/jsx-no-bind" :"off"
   }
 }

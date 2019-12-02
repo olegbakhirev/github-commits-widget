@@ -10,8 +10,8 @@ import Link from '@jetbrains/ring-ui/components/link/link';
 import EmptyWidget, {EmptyWidgetFaces} from '@jetbrains/hub-widget-ui/dist/empty-widget';
 import Loader from '@jetbrains/ring-ui/components/loader/loader';
 import moment from 'moment';
-import '@github/clipboard-copy-element';
 import md5 from 'md5';
+import copy from 'copy-to-clipboard';
 
 import '@jetbrains/ring-ui/components/form/form.scss';
 
@@ -57,6 +57,7 @@ class Widget extends Component {
       this.setState(
         {
           isConfiguring: false,
+          repoUrl: config.repoUrl,
           userName: config.userName,
           projectId: config.projectId,
           apiKey: config.apiKey,
@@ -70,8 +71,25 @@ class Widget extends Component {
   }
 
   saveConfig = async () => {
-    const {userName, projectId, apiKey} = this.state;
-    await this.props.dashboardApi.storeConfig({userName, projectId, apiKey});
+    const {repoUrl, userName, projectId, apiKey} = this.state;
+
+    const urlSplitted = repoUrl.split('/');
+    if (urlSplitted.length !== 5) {
+      this.setState({
+        configurationError: 'Incorrect GitHub repository URL'
+      });
+      return;
+    }
+
+    this.setState({
+      configurationError: null,
+      projectId: urlSplitted[4],
+      userName: urlSplitted[3]
+    });
+
+    await this.props.dashboardApi.storeConfig({
+      repoUrl, userName, projectId, apiKey
+    });
     this.setState({isConfiguring: false});
     this.loadCommitsData();
   };
@@ -88,12 +106,8 @@ class Widget extends Component {
     }
   };
 
-  changeUserName = e => this.setState({
-    userName: e.target.value
-  });
-
-  changeProjectId = e => this.setState({
-    projectId: e.target.value
+  changeRepoUrl = e => this.setState({
+    repoUrl: e.target.value
   });
 
   changeApiKey = e => this.setState({
@@ -101,24 +115,19 @@ class Widget extends Component {
   });
 
   renderConfiguration() {
-    const {userName, projectId, apiKey} = this.state;
+    const {repoUrl, apiKey, configurationError} =
+      this.state;
 
     return (
       <div className={styles.widget}>
         <div className="ring-form__group">
           <Input
-            placeholder="Project Name"
-            onChange={this.changeProjectId}
-            value={projectId}
+            placeholder="Repository URL"
+            onChange={this.changeRepoUrl}
+            value={repoUrl}
             size={InputSize.FULL}
-          />
-        </div>
-        <div className="ring-form__group">
-          <Input
-            placeholder="User Name"
-            onChange={this.changeUserName}
-            value={userName}
-            size={InputSize.FULL}
+            error={configurationError}
+
           />
         </div>
         <div className="ring-form__group">
@@ -133,7 +142,7 @@ class Widget extends Component {
         <Panel className={styles.formFooter}>
           <Button
             primary={true}
-            disabled={!projectId || !userName}
+            disabled={!repoUrl}
             onClick={this.saveConfig}
           >
             {'Save'}
@@ -285,12 +294,14 @@ class Widget extends Component {
                         className={styles.avatar}
                         src={commitItem.author ? commitItem.author.avatar_url : `https://www.gravatar.com/avatar/${md5(commitItem.commit.author.email)}`}
                       />
-                      <div>{`${commitItem.commit.author.name} commited on ${moment(commitItem.commit.author.date).format('MMMM DD, YYYY')}`}</div>
+                      <div
+                        className={styles.commitAuthor}
+                      >{`${commitItem.commit.author.name} commited on ${moment(commitItem.commit.author.date).format('MMMM DD, YYYY')}`}</div>
                     </div>
                   </div>
                   <div className={styles.commitLinksCell}>
                     <div className={styles.commitLinksGroup}>
-                      <clipboard-copy class={styles.copyToClipboardBtn} value={commitItem.sha}>
+                      <div className={styles.copyToClipboardBtn} onClick={() => copy(commitItem.sha)}>
                         <svg
                           className={styles.copyToClipboardIcon}
                           viewBox="0 0 12 12"
@@ -304,7 +315,7 @@ class Widget extends Component {
                             d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"
                           />
                         </svg>
-                      </clipboard-copy>
+                      </div>
                       <a
                         href={commitItem.html_url}
                         className={styles.revisionLink}
@@ -356,7 +367,7 @@ class Widget extends Component {
               pseudo={true}
               onClick={this.editWidgetSettings}
             >
-              {'Set Project ID and User login'}
+              {'Set repository URL'}
             </Link>
           </EmptyWidget>
         </div>
