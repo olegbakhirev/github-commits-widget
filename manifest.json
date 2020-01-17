@@ -1,9 +1,9 @@
 {
   "key": "github-commits-widget",
   "name": "GitHub Commits Widget",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Widget for displaying commits for GitHub project",
-  "author": "Oleg Bakhirev <oleg.bakhirev@gmail.com>",
+  "author": "JetBrains",
   "iconUrl": "pict/github.png",
   "capabilities": {
     "topNavigation": true,
