@@ -71,7 +71,7 @@ class Widget extends Component {
   }
 
   saveConfig = async () => {
-    const {repoUrl, userName, projectId, apiKey} = this.state;
+    const {repoUrl, apiKey} = this.state;
 
     const urlSplitted = repoUrl.split('/');
     if (urlSplitted.length !== 5) {
@@ -81,10 +81,13 @@ class Widget extends Component {
       return;
     }
 
+    const projectId = urlSplitted[4];
+    const userName = urlSplitted[3];
+
     this.setState({
       configurationError: null,
-      projectId: urlSplitted[4],
-      userName: urlSplitted[3]
+      projectId,
+      userName
     });
 
     await this.props.dashboardApi.storeConfig({
