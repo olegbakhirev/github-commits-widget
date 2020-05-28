@@ -9,7 +9,7 @@ const pkgConfig = require('./package.json').config;
 const componentsPath = join(__dirname, pkgConfig.components);
 
 // Patch @jetbrains/ring-ui svg-sprite-loader config
-ringUiWebpackConfig.loaders.svgSpriteLoader.include.push(
+ringUiWebpackConfig.loaders.svgInlineLoader.include.push(
   require('@jetbrains/logos'),
   require('@jetbrains/icons')
 );
@@ -35,15 +35,17 @@ const webpackConfig = () => ({
       ...ringUiWebpackConfig.config.module.rules,
       {
         test: /\.css$/,
-        include: componentsPath,
+        include: [componentsPath],
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:7]'
+              import: true,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:7]'
+              },
+              importLoaders: 1
             }
           },
           {
@@ -51,11 +53,11 @@ const webpackConfig = () => ({
             options: {
               plugins: () => [
                 require('postcss-modules-values-replace')({}),
-                require('postcss-cssnext')({
+                require('postcss-preset-env')({
+                  importFrom: require.resolve('@jetbrains/ring-ui/components/global/variables.css'),
                   features: {
-                    customProperties: {
-                      preserve: true,
-                      variables: require('@jetbrains/ring-ui/extract-css-vars')
+                    'postcss-custom-properties': {
+                      preserve: true
                     }
                   }
                 })

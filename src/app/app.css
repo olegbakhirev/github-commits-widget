@@ -1,31 +1,30 @@
-@value unit, font, font-size from "@jetbrains/ring-ui/components/global/global.css";
-
 :global(.widget-body) {
   margin: 0;
-  padding: calc(unit * 2);
+  padding: calc(var(--ring-unit) * 2);
 
-  background: #fff;
+  background: var(--ring-content-background-color);
 
-  font-size: font-size;
+  font-size: var(--ring-font-size);
 }
 
 .widget {
-  composes: font;
-
   width: 100%;
 
   margin: 0;
   padding: 0;
 
   white-space: nowrap;
+
+  font-family: var(--ring-font-family);
+  font-size: var(--ring-font-size);
 }
 
 .commitIcon {
   position: absolute;
   left: -8px;
 
-  color: rgb(198, 203, 209);
-  fill: rgb(198, 203, 209);
+  color: var(--ring-secondary-color);
+  fill: var(--ring-secondary-color);
 }
 
 .commitCell {
@@ -37,11 +36,13 @@
 .commitTitle {
   overflow: hidden;
 
+  padding-bottom: 4px;
+
   padding-left: 10px;
 
   text-overflow: ellipsis;
 
-  color: rgb(68, 77, 86);
+  color: var(--ring-heading-color);
 
   font-weight: 600;
 }
@@ -73,7 +74,7 @@
 
   content: "";
 
-  background-color: #eff1f3;
+  background-color: var(--ring-border-disabled-color);
 }
 
 .commitPanel {
@@ -85,10 +86,14 @@
   height: 50px;
   margin-left: 8px;
 
-  color: rgb(106, 115, 125);
-  border: 1px solid rgb(234, 236, 239);
+  color: var(--ring-heading-color);
+  border: 1px solid var(--ring-border-disabled-color);
 
   font-size: 14px;
+}
+
+.commitPanel:hover {
+  background: var(--ring-selected-background-color);
 }
 
 .commitBlock {
@@ -109,6 +114,8 @@
 
   padding-left: 10px;
 
+  color: var(--ring-secondary-color);
+
   font-size: 12px;
   font-weight: 400;
 }
@@ -117,7 +124,6 @@
   position: relative;
 
   display: table-cell;
-  align-self: right;
 
   max-width: 170px;
   height: 62px;
@@ -153,7 +159,7 @@
   white-space: nowrap;
 
   color: rgb(3, 102, 214);
-  border: 1px solid rgba(27, 31, 35, 0.2);
+  border: 1px solid var(--ring-border-disabled-color);
 
   border-radius: 0 3px 3px 0;
 
@@ -185,11 +191,11 @@
   white-space: nowrap;
 
   color: rgb(3, 102, 214) !important;
-  border: 1px solid rgba(27, 31, 35, 0.2);
+  border: 1px solid var(--ring-border-disabled-color);
   border-right-width: 0;
 
   border-radius: 3px 0 0 3px;
-  background-color: rgb(255, 255, 255);
+  background: transparent;
 
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 20px;
@@ -273,17 +279,17 @@
   vertical-align: middle;
 
   color: rgb(3, 102, 214);
-  border: 1px solid rgba(27, 31, 35, 0.2);
+  border: 1px solid var(--ring-border-disabled-color);
 
   border-radius: 3px;
-  background: rgb(255, 255, 255) none;
+  background: transparent;
 
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 10px;
   font-weight: 400;
+  line-height: 15px;
 
   fill: rgb(3, 102, 214);
-  line-height: 15px;
 }
 
 .viewCodeIcon {
@@ -308,4 +314,94 @@
   overflow: hidden;
 
   text-overflow: ellipsis;
+}
+
+.viewButtonGroup {
+  padding-bottom: 8px;
+}
+
+.issueRow {
+  display: flex;
+  flex-direction: row;
+
+  padding: 8px;
+}
+
+.issueRow:hover {
+  background-color: var(--ring-hover-background-color);
+}
+
+.issueIcon {
+  margin-left: 8px;
+}
+
+.issueInfo {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 8px;
+}
+
+.issueTitle {
+  overflow: hidden;
+
+  max-width: 100%;
+
+  text-decoration: none;
+  text-overflow: ellipsis;
+
+  color: var(--ring-heading-color);
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  overflow-wrap: break-word;
+}
+
+.issueTitle:hover {
+  color: var(--ring-main-hover-color);
+}
+
+.stateDescription {
+  color: var(--ring-secondary-color);
+}
+
+.issueAuthorLink {
+  text-decoration: none;
+
+  color: var(--ring-secondary-color);
+}
+
+.issueAuthorLink:hover {
+  color: var(--ring-main-hover-color);
+}
+
+.closedRequestIcon {
+  fill: rgb(203, 36, 49);
+}
+
+.mergedRequestIcon {
+  fill: rgb(111, 66, 193);
+}
+
+.openRequestIcon {
+  fill: rgb(40, 167, 69);
+}
+
+.closedIssueIcon {
+  fill: rgb(203, 36, 49);
+}
+
+.openIssueIcon {
+  fill: rgb(40, 167, 69);
+}
+
+.buttonGroupCaption {
+  color: var(--ring-text-color);
+}
+
+.issueFilter {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
 }
