@@ -34,7 +34,8 @@ class Widget extends Component {
 
     this.state = {
       isConfiguring: true,
-      dataFetchFailed: false
+      dataFetchFailed: false,
+      issuesFilter: 'is:open'
     };
 
     registerWidgetApi({
@@ -65,7 +66,6 @@ class Widget extends Component {
           issuePagesLoaded: 0,
           issueTotalPages: 0,
           isIssuesView: false,
-          issuesFilter: 'is:open',
           isLoading: true
         }
       );
@@ -191,7 +191,6 @@ class Widget extends Component {
   async loadIssuesData() {
     const {dashboardApi} = this.props;
     const {userName, projectId, apiKey, issuesFilter} = this.state;
-
     dashboardApi.setTitle(
       projectId
         ? `Project: ${projectId}`
@@ -532,7 +531,8 @@ class Widget extends Component {
                   <div className={styles.commitLinksGroup}>
                     <div
                       className={styles.copyToClipboardBtn}
-                      onClick={() => copy(commitItem.sha)}>
+                      onClick={() => copy(commitItem.sha)}
+                    >
                       <svg
                         className={styles.copyToClipboardIcon}
                         viewBox="0 0 12 12"

@@ -98,6 +98,9 @@ const webpackConfig = () => ({
       template: 'html-loader?interpolate!src/index.html'
     }),
     new CopyWebpackPlugin([
+      'manifest.json'
+    ], {}),
+    new CopyWebpackPlugin([
       {from: 'pict/*'}
     ])
 

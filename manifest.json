@@ -1,7 +1,7 @@
 {
   "key": "github-commits-widget",
   "name": "GitHub Commits Widget",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Widget for displaying commits for GitHub project",
   "author": "JetBrains",
   "iconUrl": "pict/github.png",
